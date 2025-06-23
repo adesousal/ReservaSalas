@@ -61,7 +61,7 @@ Sistema para gerenciamento de reservas de salas de reunião em um coworking, com
 1. **Clone o repositório**
 
    ```bash
-   git clone https://seu-repositorio/ReservaSalas.git
+   git clone https://github.com/adesousal/ReservaSalas.git
    cd ReservaSalas
    ```
 
