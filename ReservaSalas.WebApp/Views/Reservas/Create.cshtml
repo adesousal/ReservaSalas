@@ -1,0 +1,86 @@
+﻿@model ReservaSalas.WebApp.Models.ReservaRequest
+
+@{
+    ViewData["Title"] = "Nova Reserva";
+    Layout = "_Layout";
+
+    var tipo = TempData["Mensagem"] != null ? "success" : "danger";
+    var mensagem = TempData["Mensagem"] ?? TempData["Erro"];
+    var exibirModal = TempData["Mensagem"] != null || TempData["Erro"] != null;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Nova Reserva</h2>
+
+    <form asp-controller="Reservas" asp-action="Create" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Sala" class="form-label"></label>
+            <input asp-for="Sala" 
+                   class="form-control"
+                   placeholder="Digite o nome da sala"
+                   title="Digite o nome da sala a ser reservada" />
+            <span asp-validation-for="Sala" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Usuario" class="form-label"></label>
+            <input asp-for="Usuario" 
+                   class="form-control"
+                   placeholder="Digite o e-mail do usuário"
+                   title="Digite o e-mail do responsável pela reserva" />
+            <span asp-validation-for="Usuario" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="DataHoraReserva" class="form-label"></label>
+            <input asp-for="DataHoraReserva"
+                   type="datetime-local" 
+                   class="form-control"
+                   value="@(Model.DataHoraReserva.ToString("yyyy-MM-ddTHH:mm"))"
+                   placeholder="Data e hora da reserva"
+                   title="Selecione a data e hora da reserva" />
+            <span asp-validation-for="DataHoraReserva" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@if (exibirModal)
+{
+    <div class="modal fade" id="mensagemModal" tabindex="-1" aria-labelledby="mensagemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-@tipo">
+                <div class="modal-header bg-@tipo text-white">
+                    <h5 class="modal-title" id="mensagemModalLabel">
+                        @(tipo == "success" ? "Sucesso" : "Erro")
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-dark">
+                    @mensagem
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-@tipo" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    @if (exibirModal)
+    {
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                var modal = new bootstrap.Modal(document.getElementById('mensagemModal'));
+                modal.show();
+            });
+        </script>
+    }
+}

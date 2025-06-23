@@ -1,0 +1,31 @@
+## Ignore ASP.NET Scaffolding
+Scaffolding/
+
+## Ignore o diretório bin/ e obj/ gerados pelo Visual Studio
+bin/
+obj/
+
+## Ignore arquivos de configurações de usuário do Visual Studio
+.vs/
+.vs2019/
+.vs2017/
+.vs2015/
+.idea/
+
+## Ignore arquivos de configuração local do Visual Studio
+.vscode/
+
+## Ignore arquivos do sistema de operação (macOS, Windows, Linux)
+.DS_Store
+Thumbs.db
+
+## Ignore pacotes de dependências NuGet
+.nuget/
+packages/
+
+## Ignore arquivos temporários do Visual Studio
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
